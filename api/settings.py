@@ -1,25 +1,63 @@
-import os
+from typing import *
 
-schema = {
-    # Schema definition, based on Cerberus grammar. Check the Cerberus project
-    # (https://github.com/pyeve/cerberus) for details.
-    'firstname': {
-        'type': 'string',
-        'minlength': 1,
-        'maxlength': 10,
+ner_model_id: str = 'asahi417/tner-xlm-roberta-base-all-english'
+spacy_colors: Dict[str, Any] = {
+    'ents': [
+        'cardinal number',
+        'cell line',
+        'cell type',
+        'chemical',
+        'corporation',
+        'date',
+        'disease',
+        'dna',
+        'event',
+        'facility',
+        'geopolitical area',
+        'group',
+        'language',
+        'law',
+        'location',
+        'money',
+        'ordinal number',
+        'organization',
+        'other',
+        'percent',
+        'person',
+        'product',
+        'protein',
+        'quantity',
+        'rna',
+        'time',
+        'work of art'
+    ],
+    'colors': {
+        'cardinal number': '#4682b4',
+        'cell line': '#ff1493',
+        'cell type': '#ffdead',
+        'chemical': '#556b2f',
+        'corporation': '#dc143c',
+        'date': '#8b008b',
+        'disease': '#008b8b',
+        'dna': '#008000',
+        'event': '#ffff00',
+        'facility': '#8a2be2',
+        'geopolitical area': '#b03060',
+        'group': '#00fa9a',
+        'language': '#0000ff',
+        'law': '#000080',
+        'location': '#add8e6',
+        'money': '#ff00ff',
+        'ordinal number': '#ff0000',
+        'organization': '#00ffff',
+        'other': '#1e90ff',
+        'percent': '#7fff00',
+        'person': '#8b4513',
+        'product': '#b8860b',
+        'protein': '#483d8b',
+        'quantity': '#ee82ee',
+        'rna': '#9acd32',
+        'time': '#bc8f8f',
+        'work of art': '#ff7f50'
     }
 }
-
-DOMAIN = {'people': {'schema': schema}}
-RESOURCE_METHODS = ['GET', 'POST', 'DELETE']
-ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE']
-
-MONGO_HOST = 'mongo'
-MONGO_PORT = 27017
-
-# Skip this block if your db has no auth. But it really should.
-MONGO_USERNAME = os.environ.get('MONGO_USERNAME')
-MONGO_PASSWORD = os.environ.get('MONGO_PASSWORD')
-MONGO_AUTH_SOURCE = 'admin'
-MONGO_DBNAME = 'people'
-
