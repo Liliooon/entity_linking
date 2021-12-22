@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+  <div class="col-md-5 p-lg-5 mx-auto my-5">
+    <form class="form-inline"> 
+  <div class="form-group">
+    <label for="firstname">Firstname</label>
+    <input type="text" name="firstname" class="form-control" id="firstname"  placeholder="Enter firstname">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <div>
+    <ol>
+      {% for item in items %}
+      <li>{{ item.firstname }}</li>
+      {% endfor %}
+    </ol>
+  </div>
+  <div class="product-device box-shadow d-none d-md-block"></div>
+  <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
+</div>
+{% endblock %}
+ 
