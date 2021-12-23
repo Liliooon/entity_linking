@@ -82,7 +82,8 @@
 
             function process_response(response) {
                 let html = atob(response.html);
-                $("#success_response").append(
+                html = decodeURIComponent(escape(html))
+                $("#formatted-html").append(
                     `
                     <div class="mb-3">
                         <h2>Named Entities in Text</h2>
