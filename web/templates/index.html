@@ -61,7 +61,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="#error_response">
+                <div id="error_response">
                     <div class="alert alert-danger" role="alert">
                         Sorry, we have encountered error communicating with api :(
                     </div>
@@ -94,7 +94,7 @@
             }
 
             function error_response(response, status_message, error) {
-                $("##error_response").show();
+                $("#error_response").show();
                 console.log(`Error communicating with server: ${status_message} || ${error} || ${response}`);
             }
 
