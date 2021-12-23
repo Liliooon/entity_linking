@@ -33,7 +33,7 @@ class JsonRpcApiClient(ApiClient):
         logging.info(f"api response: {req.status_code} - {req}")
         response = req.json()
         if req.status_code == 200:
-            result = response.result
+            result = response['result']
             result['html'] = b64.b64decode(result['html']).decode(encoding='utf-8')
             return result
         else:
