@@ -48,7 +48,7 @@
                         <input name="input_text" type="text" class="form-control" id="inputText" placeholder="Введите текст">
                     </div>
                     <div class="col-auto">
-                        <button type="submit" class="btn btn-primary mb-3">Отправить</button>
+                        <button id="submit" type="submit" class="btn btn-primary mb-3">Отправить</button>
                     </div>
                 </form>
                 <!--<div class="mb-3">
@@ -79,6 +79,11 @@
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <script src="./static/js/bootstrap.bundle.min.js"></script>
         <script>
+            $("#submit").onclick(function () {
+                let text = $("#inputText").val();
+                make_api_request(text);
+            });
+
             function process_response(response) {
                 console.log(response.data)
             }
