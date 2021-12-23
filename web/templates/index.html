@@ -87,7 +87,7 @@
             });
 
             function process_response(response) {
-                console.log(response.data)
+                console.log($.parseJSON(response));
             }
 
             function make_api_request(text) {
@@ -99,7 +99,8 @@
                     }),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                }).done(process_response);
+                    success: process_response
+                });
             }
         </script>
     </body>
