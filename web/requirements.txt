@@ -2,3 +2,4 @@ Flask==2.0.2
 requests==2.26.0
 jsonrpcclient==4.0.2
 requests==2.26.0
+flask-cors

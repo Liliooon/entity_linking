@@ -1,7 +1,6 @@
-import requests
-from flask import Flask, render_template, request
-import requests
+from flask import Flask, render_template, request, jsonify
 from api_client import JsonRpcApiClient
+from typing import *
 
 app = Flask(__name__)
 client = JsonRpcApiClient()
@@ -9,27 +8,14 @@ client = JsonRpcApiClient()
 
 @app.route("/")
 def index():
-    return render_template("index.html.j2")
+    return render_template("index.html")
 
 
-@app.route("/", methods=["POST"])
+@app.route("/api/rpc", methods=["POST"])
 def form_submit():
-    text = request.form["input_text"]
-    result = client.process_text(text)
-    if result is not None:
-        return render_template(
-            "index.html.j2",
-            display='ok',
-            output_text=result['html'],
-            entity_result=result['entities']
-        )
-    else:
-        return render_template(
-            "index.html.j2",
-            display='error',
-            entity_result="Error communicating with api",
-            entities=[]
-        )
+    text: str = request.json['text']
+    response: Dict[str, Any] = client.process_text(text, decode_html=False)
+    return jsonify(response)
 
 
 if __name__ == "__main__":
