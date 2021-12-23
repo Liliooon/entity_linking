@@ -55,7 +55,7 @@
     <button type="submit" class="btn btn-primary mb-3">Отправить</button>
   </div>
 </form>
-{% if display %}
+{% if display == "ok"%}
 <div class="mb-3">
   <h2>Named Entities in Text</h2>
   <p name="output_text" type="text" class="h5">{{ output_text }}</p>
@@ -76,7 +76,7 @@
   {% endfor %}
   </div>
 </div>
-{% else %}
+{% elif display == "error"%}
 <div class="">
     <div class="alert alert-danger" role="alert">
       Sorry, we have encountered error communicating with api :(

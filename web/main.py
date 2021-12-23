@@ -19,14 +19,14 @@ def form_submit():
     if result is not None:
         return render_template(
             "index.html.j2",
-            display=True,
+            display='ok',
             output_text=result['html'],
             entity_result=result['entities']
         )
     else:
         return render_template(
             "index.html.j2",
-            display=False,
+            display='error',
             entity_result="Error communicating with api",
             entities=[]
         )
