@@ -52,7 +52,7 @@
                     </div>
                 </form>
                 <div id="success_response">
-                    <div id="formatted-html">
+                    <div id="formatted_html">
                     </div>
                     <div class="mb-3">
                         <h2>Entity Explanations</h2>
@@ -61,33 +61,51 @@
                         </div>
                     </div>
                 </div>
-                <div class="">
+                <div id="#error_response">
                     <div class="alert alert-danger" role="alert">
                         Sorry, we have encountered error communicating with api :(
                     </div>
-                </div>-->
+                </div>
             </main>
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <script src="./static/js/bootstrap.bundle.min.js"></script>
         <script>
             $("#success_response").hide();
+            $("##error_response").hide();
 
             $("#form").submit(function (event) {
                 event.preventDefault();
+
+                $("#formatted_html").empty();
+                $("#entities").empty();
+                $("#success_response").hide();
+                $("##error_response").hide();
+
                 let text = $("#inputText").val();
                 console.log(text);
                 make_api_request(text);
             });
 
-            function process_response(response) {
+            function base64_to_html(b64) {
                 let html = atob(response.html);
-                html = decodeURIComponent(escape(html))
-                $("#formatted-html").append(
+                html = decodeURIComponent(escape(html));
+                return html;
+            }
+
+            function error_response(response, status_message, error) {
+                $("##error_response").show();
+                console.log(`Error communicating with server: ${status_message} || ${error} || ${response}`);
+            }
+
+            function successful_response(response) {
+                $("#formatted_html").append(
                     `
                     <div class="mb-3">
                         <h2>Named Entities in Text</h2>
-                        <p name="output_text" type="text" class="h5">${html}</p>
+                        <p name="output_text" type="text" class="h5">
+                            ${base64_to_html(response.html)}
+                        </p>
                     </div>
                     `
                 )
@@ -121,7 +139,8 @@
                     }),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                    success: process_response
+                    success: process_response,
+
                 });
             }
         </script>
