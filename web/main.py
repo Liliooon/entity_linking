@@ -26,7 +26,7 @@ def form_submit():
     else:
         return render_template(
             "index.html.j2",
-            display=True,
+            display=False,
             entity_result="Error communicating with api",
             entities=[]
         )

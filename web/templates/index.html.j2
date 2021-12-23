@@ -61,7 +61,7 @@
   <p name="output_text" type="text" class="h5">{{ output_text }}</p>
 </div>
 <div class="mb-3">
-  <h2>Entity Exmplanations</h2>
+  <h2>Entity Explanations</h2>
   <div class="card-deck">
   {% for entity in entity_result %}
     <div class="card">
@@ -75,6 +75,12 @@
     </div>
   {% endfor %}
   </div>
+</div>
+{% else }
+<div class="">
+    <div class="alert alert-danger" role="alert">
+      Sorry, we have encountered error communicating with api :(
+    </div>
 </div>
 {% endif %}
 
