@@ -27,6 +27,7 @@ class JsonRpcApiClient(ApiClient):
             }
         )
         req = requests.post(self.endpoint, json=api_req)
+        logging.info(f"api response: {req.status_code} - {req}")
         response = parse_json(req.json())
         if isinstance(response, Ok):
             result = response.result
