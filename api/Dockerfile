@@ -9,5 +9,6 @@ RUN pip install sentencepiece==0.1.96
 
 COPY . .
 RUN python -c "from transformers import pipeline; import settings; p = pipeline('token-classification', model=settings.ner_model_id)"
+EXPOSE 8000
 
 CMD [ "python", "./main.py" ]

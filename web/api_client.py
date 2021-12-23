@@ -1,9 +1,10 @@
 import base64 as b64
-from jsonrpcclient import request_json, parse_json, Ok
 import requests
+import uuid
 from typing import *
 import settings
 import logging
+
 
 class ApiClient:
 
@@ -18,14 +19,16 @@ class JsonRpcApiClient(ApiClient):
         self.endpoint = settings.api_address
 
     def process_text(self, text: str) -> Union[Dict[str, Any], None]:
-        api_req = request_json(
-            settings.api_method_name,
-            params={
+        api_req = {
+            "method": settings.api_method_name,
+            "jsonrpc": "2.0",
+            "id": str(uuid.uuid4()),
+            "params": {
                 "text": text,
                 "return_html": True,
                 "return_wiki_entities": True
             }
-        )
+        }
         req = requests.post(self.endpoint, json=api_req)
         logging.info(f"api response: {req.status_code} - {req}")
         response = parse_json(req.json())
