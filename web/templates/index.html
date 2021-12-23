@@ -51,21 +51,13 @@
                         <button id="submit" type="submit" class="btn btn-primary mb-3">Отправить</button>
                     </div>
                 </form>
-                <!--<div class="mb-3">
-                    <h2>Named Entities in Text</h2>
-                    <p name="output_text" type="text" class="h5">{{ output_text }}</p>
-                </div>
-                <div class="mb-3">
-                    <h2>Entity Explanations</h2>
-                    <div class="card-deck">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">word</h5>
-                                <p class="card-text">description</p>
-                            </div>
-                            <div class="card-footer">
-                                <a href="#" class="btn btn-primary">Learn more (wiki)</a>
-                            </div>
+                <div id="success_response">
+                    <div id="#formatted-html">
+                    </div>
+                    <div class="mb-3">
+                        <h2>Entity Explanations</h2>
+                        <div class="card-deck" id="entities">
+
                         </div>
                     </div>
                 </div>
@@ -79,6 +71,8 @@
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <script src="./static/js/bootstrap.bundle.min.js"></script>
         <script>
+            $("#success_response").hide();
+
             $("#form").submit(function (event) {
                 event.preventDefault();
                 let text = $("#inputText").val();
@@ -87,8 +81,34 @@
             });
 
             function process_response(response) {
-                console.log(response);
-                console.log(JSON.parse(response));
+                let html = atob(response.html);
+                $("#success_response").append(
+                    `
+                    <div class="mb-3">
+                        <h2>Named Entities in Text</h2>
+                        <p name="output_text" type="text" class="h5">${html}</p>
+                    </div>
+                    `
+                )
+                response.entities.forEach(function (item) {
+                    let word = item.word;
+                    let desc = item.description;
+                    let link = item.link;
+                    $("#entities").append(
+                        `
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">${word}</h5>
+                                <p class="card-text">${desc}</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="${link}" class="btn btn-primary">Learn more (wiki)</a>
+                            </div>
+                        </div>
+                        `
+                    )
+                });
+                $("#success_response").show();
             }
 
             function make_api_request(text) {
