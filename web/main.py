@@ -17,9 +17,19 @@ def form_submit():
     text = request.form["input_text"]
     result = client.process_text(text)
     if result is not None:
-        return render_template("index.html.j2", output_text=result['html'])
+        return render_template(
+            "index.html.j2",
+            display=True,
+            output_text=result['html'],
+            entity_result=result['entities']
+        )
     else:
-        return render_template("index.html.j2", output_text="Error communicating with api")
+        return render_template(
+            "index.html.j2",
+            display=True,
+            entity_result="Error communicating with api",
+            entities=[]
+        )
 
 
 if __name__ == "__main__":
