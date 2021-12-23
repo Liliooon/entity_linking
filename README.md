@@ -4,7 +4,7 @@ Entity Linking is a service for recognizing named entities in input text, provid
 
 ## Installation
 
-Use the package manager [docker](https://docs.docker.com/get-docker/) to install Entity Linking.
+Use [docker](https://docs.docker.com/get-docker/) to install Entity Linking.
 
 ```bash
 docker-compose build
