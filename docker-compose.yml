@@ -4,20 +4,10 @@ services:
     build: 
       context: web
     ports:
-      - "5000:5000"
+      - "9000:9000"
   api:
     build:
       context: api
     ports:
       - "8000:8000"
-    environment:
-      MONGO_USERNAME: root
-      MONGO_PASSWORD: example
-
-  mongo:
-    image: mongo
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
 
