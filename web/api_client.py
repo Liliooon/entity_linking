@@ -31,12 +31,12 @@ class JsonRpcApiClient(ApiClient):
         }
         req = requests.post(self.endpoint, json=api_req)
         logging.info(f"api response: {req.status_code} - {req}")
-        response = req.json()
         if req.status_code == 200:
+            response = req.json()
             result = response['result']
             result['html'] = b64.b64decode(result['html']).decode(encoding='utf-8')
             result['entities'] = list(filter(lambda x: x['description'] != 0, result['entities']))
             return result
         else:
-            logging.error(response.message)
+            logging.error(f"Failed communicating with api - {req}")
             return None
