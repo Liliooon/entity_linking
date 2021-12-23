@@ -92,11 +92,13 @@
 
             function make_api_request(text) {
                 $.ajax({
-                    'url': "http://ec2-3-125-124-144.eu-central-1.compute.amazonaws.com/api/rpc",
-                    'type': "POST",
-                    'data': {
+                    url: "api/rpc",
+                    type: "POST",
+                    data: JSON.stringify({
                         "text": text
-                    }
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
                 }).done(process_response);
             }
         </script>
