@@ -35,6 +35,7 @@ class JsonRpcApiClient(ApiClient):
         if req.status_code == 200:
             result = response['result']
             result['html'] = b64.b64decode(result['html']).decode(encoding='utf-8')
+            result['entities'] = list(filter(lambda x: x['description'] != 0, result['entities']))
             return result
         else:
             logging.error(response.message)
