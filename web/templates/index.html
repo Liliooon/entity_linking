@@ -87,7 +87,8 @@
             });
 
             function process_response(response) {
-                console.log($.parseJSON(response));
+                console.log(response);
+                console.log(JSON.parse(response));
             }
 
             function make_api_request(text) {
