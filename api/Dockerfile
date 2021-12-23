@@ -1,4 +1,4 @@
-FROM python:3-alpine
+FROM python:3-buster
 
 WORKDIR /usr/src/app
 
