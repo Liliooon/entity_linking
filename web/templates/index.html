@@ -80,7 +80,7 @@
                 $("#formatted_html").empty();
                 $("#entities").empty();
                 $("#success_response").hide();
-                $("##error_response").hide();
+                $("#error_response").hide();
 
                 let text = $("#inputText").val();
                 console.log(text);
@@ -88,7 +88,7 @@
             });
 
             function base64_to_html(b64) {
-                let html = atob(response.html);
+                let html = atob(b63);
                 html = decodeURIComponent(escape(html));
                 return html;
             }
