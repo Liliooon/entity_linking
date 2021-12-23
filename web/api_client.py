@@ -31,8 +31,8 @@ class JsonRpcApiClient(ApiClient):
         }
         req = requests.post(self.endpoint, json=api_req)
         logging.info(f"api response: {req.status_code} - {req}")
-        response = parse_json(req.json())
-        if isinstance(response, Ok):
+        response = req.json()
+        if req.status_code == 200:
             result = response.result
             result['html'] = b64.b64decode(result['html']).decode(encoding='utf-8')
             return result
