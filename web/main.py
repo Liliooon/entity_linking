@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, jsonify
 from api_client import JsonRpcApiClient
+from flask_cors import CORS
 from typing import *
 
 app = Flask(__name__)
+CORS(app)
 client = JsonRpcApiClient()
 
 
@@ -12,7 +14,7 @@ def index():
 
 
 @app.route("/api/rpc", methods=["POST"])
-def form_submit():
+def api_request():
     text: str = request.json['text']
     response: Dict[str, Any] = client.process_text(text, decode_html=False)
     return jsonify(response)
